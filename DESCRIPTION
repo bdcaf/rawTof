@@ -11,7 +11,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: rhdf5
-Suggests: knitr, rmarkdown
+Suggests: knitr, rmarkdown, curl
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2017-08-05 12:21:26 UTC; cle

@@ -16,6 +16,14 @@ vignette: >
 This vignette shows how to load the sample PTR data provided by
 Ionicon.
 
+_Note: this will download a 45M file_
+```{r}
+tof_file <- file.path(tempdir(), "PTRTOF_test_spectrum.h5")
+library(curl)
+curl_download("https://dl.dropboxusercontent.com/s/c4miuh22ojswf5r/PTRTOF_test_spectrum.h5?dl=0#",
+			  destfile=tof_file)
+```
+
 The package requires [rhdf5](https://bioconductor.org/packages/release/bioc/html/rhdf5.html).
 ```{r library}
 library(rhdf5)
@@ -25,8 +33,7 @@ library(rawTof)
 ## Opening a TOF file
 
 ```{r opening a tof file}
-tof.h5 <- system.file("extdata", "PTRTOF_test_spectrum.h5", package = "rawTof")
-fid <- H5Fopen(tof.h5)
+fid <- H5Fopen(tof_file)
 ```
 
 ## Getting the peak data
