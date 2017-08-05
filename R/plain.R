@@ -63,25 +63,3 @@ get_single_scan <- function(fid, id){
           h5spaceMem = h5spacemem )
 }
 
-library(rhdf5)
-
-tof.h5 <- "data/PTRTOF_test_spectrum.h5"
-fid <- H5Fopen(tof.h5)
-
-peaktable <- get_peak_matrix(fid)
-plot(peaktable[69, ], type="l")
-plot(peaktable[45, ], type="l")
-
-mh <- masscal_helper(fid)
-ss <- get_sum_spec(fid)/180
-s2 <- get_single_scan(fid, 31)
-mass_scale <- mh$to_mass(seq_along(ss))
-plot(mass_scale, s2, type="l")
-lines(mass_scale, ss, col="red")
-
-mass_range <- mh$to_index(c(40, 50))
-selected <- seq(from = floor(mass_range[1]),
-                to = ceiling(mass_range[2]))
-
-plot(mass_scale[selected], s2[selected], type="l")
-lines(mass_scale[selected], ss[selected], col="red")

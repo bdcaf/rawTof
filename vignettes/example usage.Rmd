@@ -1,0 +1,89 @@
+---
+title: "Example usage or rawTof"
+author: "Clemens Ager"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This vignette shows how to load the sample PTR data provided by
+Ionicon.
+
+The package requires [rhdf5](https://bioconductor.org/packages/release/bioc/html/rhdf5.html).
+```{r library}
+library(rhdf5)
+```
+
+## Opening a TOF file
+
+```{r opening a tof file}
+tof.h5 <- "extdata/PTRTOF_test_spectrum.h5"
+fid <- H5Fopen(tof.h5)
+```
+
+```{r}
+peaktable <- get_peak_matrix(fid)
+plot(peaktable[69, ], type="l")
+plot(peaktable[45, ], type="l")
+
+mh <- masscal_helper(fid)
+ss <- get_sum_spec(fid)/180
+s2 <- get_single_scan(fid, 31)
+mass_scale <- mh$to_mass(seq_along(ss))
+plot(mass_scale, s2, type="l")
+lines(mass_scale, ss, col="red")
+
+mass_range <- mh$to_index(c(40, 50))
+selected <- seq(from = floor(mass_range[1]),
+                to = ceiling(mass_range[2]))
+
+plot(mass_scale[selected], s2[selected], type="l")
+lines(mass_scale[selected], ss[selected], col="red")
+```
+
+
+
+## Vignette Info
+
+Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
