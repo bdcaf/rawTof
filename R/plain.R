@@ -16,6 +16,15 @@ masscal_helper <- function(fid){
              ))
 }
 
+dimhelper <- function(i, wid) c(i %% wid +1, i %/% wid)
+
+get_single_scan <- function(fid, id){
+  tofblock <- H5Dopen(H5Gopen(fid, "FullSpectra"), 
+                      "TofData")
+  h5spaceFile <- H5Dget_space(tofblock)
+  dims <- H5Sget_simple_extent_dims(h5spaceFile)
+}
+
 library(rhdf5)
 
 tof.h5 <- "data/PTRTOF_test_spectrum.h5"
@@ -29,3 +38,10 @@ mh <- masscal_helper(fid)
 ss <- get_sum_spec(fid)
 mass_scale <- mh$to_mass(seq_along(ss))
 plot(mass_scale, ss, type="l")
+
+mass_range <- mh$to_index(c(40, 50))
+selected <- seq(from = floor(mass_range[1]),
+                to = ceiling(mass_range[2]))
+
+plot(mass_scale[selected], ss[selected], type="l")
+
