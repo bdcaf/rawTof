@@ -15,27 +15,53 @@ Ionicon.
 The package requires [rhdf5](https://bioconductor.org/packages/release/bioc/html/rhdf5.html).
 ```{r library}
 library(rhdf5)
+library(rawTof)
 ```
 
 ## Opening a TOF file
 
 ```{r opening a tof file}
-tof.h5 <- "extdata/PTRTOF_test_spectrum.h5"
+tof.h5 <- system.file("extdata", "PTRTOF_test_spectrum.h5", package = "rawTof")
 fid <- H5Fopen(tof.h5)
 ```
 
+## Getting the peak data
+
 ```{r}
 peaktable <- get_peak_matrix(fid)
-plot(peaktable[69, ], type="l")
-plot(peaktable[45, ], type="l")
+plot(peaktable[69, ], type="l", ylab="m/z 69")
+plot(peaktable[45, ], type="l", ylab="m/z 45")
+```
 
-mh <- masscal_helper(fid)
+
+## Getting individual scans and the sum spectrum
+
+
+### obtaining the mass calibration
+
+### getting the sum spectrum
+```{r}
 ss <- get_sum_spec(fid)/180
+```
+
+```{r}
 s2 <- get_single_scan(fid, 31)
+```
+
+```{r}
+mh <- masscal_helper(fid)
 mass_scale <- mh$to_mass(seq_along(ss))
+```
+
+### Plotting
+
+```{r}
 plot(mass_scale, s2, type="l")
 lines(mass_scale, ss, col="red")
+```
 
+#### extracting a mass range
+```{r}
 mass_range <- mh$to_index(c(40, 50))
 selected <- seq(from = floor(mass_range[1]),
                 to = ceiling(mass_range[2]))
@@ -43,47 +69,3 @@ selected <- seq(from = floor(mass_range[1]),
 plot(mass_scale[selected], s2[selected], type="l")
 lines(mass_scale[selected], ss[selected], col="red")
 ```
-
-
-
-## Vignette Info
-
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))

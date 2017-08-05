@@ -3,13 +3,17 @@ Title: rawTof
 Version: 0.1.1.000
 Authors@R: person("Clemens", "Ager", email = "clemens.ager@uibk.ac.at", role = c("aut", "cre"))
 Description: Simple scripts to read out TOF-PTR-MS h5 files such as
-  created from ionicon instruments
+  created from ionicon instruments.
+  Note that I am not affiliated with ionicon.
 Depends: R (>= 3.4.1)
 License: MIT
 Encoding: UTF-8
 LazyData: true
-Imports:
-  rhdf5
-Suggests: knitr,
-    rmarkdown
+Imports: rhdf5
+Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2017-08-05 12:21:26 UTC; cle
+Author: Clemens Ager [aut, cre]
+Maintainer: Clemens Ager <clemens.ager@uibk.ac.at>
+RoxygenNote: 6.0.1
