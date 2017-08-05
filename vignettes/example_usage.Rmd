@@ -2,12 +2,16 @@
 title: "Example usage or rawTof"
 author: "Clemens Ager"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown:::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Example Usage}
+  %\VignetteKeyword{example}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+# Example usage
 
 This vignette shows how to load the sample PTR data provided by
 Ionicon.

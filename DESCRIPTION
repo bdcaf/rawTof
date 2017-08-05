@@ -1,4 +1,5 @@
 Package: rawTof
+Type: Package
 Title: rawTof
 Version: 0.1.1.000
 Authors@R: person("Clemens", "Ager", email = "clemens.ager@uibk.ac.at", role = c("aut", "cre"))
@@ -6,7 +7,7 @@ Description: Simple scripts to read out TOF-PTR-MS h5 files such as
   created from ionicon instruments.
   Note that I am not affiliated with ionicon.
 Depends: R (>= 3.4.1)
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: rhdf5
