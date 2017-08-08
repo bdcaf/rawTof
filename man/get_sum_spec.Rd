@@ -12,3 +12,12 @@ get_sum_spec(fid)
 \description{
 retrieve sum spectrum
 }
+\examples{
+\dontrun{
+fid <- h5open('toffile.h5')
+get_sum_spec(fid)
+}
+}
+\seealso{
+\code{get_single_scan} which returns individual scans
+}

@@ -9,6 +9,15 @@ get_peak_matrix(fid)
 \arguments{
 \item{fid}{h5d file handle}
 }
+\value{
+matrix of all peaks captured in Ionicion sofrtware
+}
 \description{
 retrieve matrix of precalculated peaks
+}
+\examples{
+\dontrun{
+fid <- h5open('toffile.h5')
+get_sum_spec(fid)
+}
 }

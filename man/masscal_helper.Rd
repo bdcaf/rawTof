@@ -12,3 +12,11 @@ masscal_helper(fid)
 \description{
 create functions to work with existing mass calibration
 }
+\examples{
+\dontrun{
+fid <- h5open('toffile.h5')
+mc <- masscal_helper(fid)
+with(mc, to_index(c(45,47)))
+with(mc, to_mass(c(2000:3000)))
+}
+}

@@ -15,9 +15,27 @@ get_single_scan(fid, id)
 vector of single scan
 }
 \description{
-Note: this function does not check whether the scan is in the range
+extract a single scan from tof spectrum
+}
+\note{
+the data block is opened with each individual call in scripts
+it may prove usefull to open it once and make smaller interactions
+with it.
+
+this function does not check whether the scan is in the range
 of measurement.  Checks will need to be done manually!
-Note2: Theoretically the full matrix of scans could be loaded similar
+
+Theoretically the full matrix of scans could be loaded similar
 to get_peak_matrix - but this will take loads of memory and usually
 is not desirable.
+}
+\examples{
+\dontrun{
+fid <- h5open('toffile.h5')
+get_single_scan(fid,1)
+}
+}
+\seealso{
+\code{get_sum_spec} which return the precalculated sum of
+all individual scans
 }
