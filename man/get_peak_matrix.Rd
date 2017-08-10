@@ -18,6 +18,6 @@ retrieve matrix of precalculated peaks
 \examples{
 \dontrun{
 fid <- h5open('toffile.h5')
-get_sum_spec(fid)
+get_peak_matrix(fid)
 }
 }
