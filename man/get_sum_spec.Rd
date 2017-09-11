@@ -4,7 +4,7 @@
 \alias{get_sum_spec}
 \title{retrieve sum spectrum}
 \usage{
-get_sum_spec(fid)
+get_sum_spec(tof_file)
 }
 \arguments{
 \item{fid}{h5d file handle}
@@ -14,8 +14,7 @@ retrieve sum spectrum
 }
 \examples{
 \dontrun{
-fid <- h5open('toffile.h5')
-get_sum_spec(fid)
+get_sum_spec("toffile.h5")
 }
 }
 \seealso{

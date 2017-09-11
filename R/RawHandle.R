@@ -3,6 +3,7 @@
 #' stores repeatedly used object information
 #' @param filename name of the h5 file
 #' @return S3 object
+#' @import rhdf5
 #' @export
 #' @examples
 #' \dontrun{

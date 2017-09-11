@@ -1,0 +1,74 @@
+---
+title: "Example usage or rawTof"
+author: "Clemens Ager"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown:::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Do it in plain rhdf5}
+  %\VignetteKeyword{example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Example usage
+
+This vignette shows how to load the sample PTR data provided by
+Ionicon using just plain rhdf5 commands.
+
+_Note: this will download a 45M file_
+```{r}
+#tof_file <- file.path("extdata/PTRTOF_test_spectrum.h5")
+tof_file <- system.file("extdata","PTRTOF_test_spectrum.h5", package="rawTof")
+if (!file.exists(tof_file)) {
+  library(curl)
+  curl_download("https://dl.dropboxusercontent.com/s/c4miuh22ojswf5r/PTRTOF_test_spectrum.h5?dl=0#",
+				destfile=tof_file)
+}
+```
+
+The package requires [rhdf5](https://bioconductor.org/packages/release/bioc/html/rhdf5.html).
+```{r library}
+library(rhdf5)
+```
+
+## see the content
+
+```{r}
+(content <- h5ls(tof_file) )
+```
+
+## get the sum spectrum
+
+```{r}
+sumspec <- h5read(tof_file, "/FullSpectra/SumSpectrum")
+plot(sumspec, type="l")
+```
+
+## peak information
+
+```{r}
+(peak_table <- h5read(tof_file, "/PeakData/PeakTable"))
+(peak_data <- h5read(tof_file, "/PeakData/PeakData"))
+```
+
+
+## full spectrum
+
+### attributes 
+
+```{r}
+(full_attrib <- h5readAttributes(tof_file, "/FullSpectra"))
+h5readAttributes(tof_file, "/RawData/HPTDC")
+h5readAttributes(tof_file, "/TimingData")
+```
+
+### get dimension info
+
+```{r}
+h5f <- H5Fopen(tof_file)
+extents <- dim(h5f$`FullSpectra/TofData`)
+aSpec <- h5f$`FullSpectra/TofData`[,1,2,3]
+plot(aSpec,type="l")
+```
+

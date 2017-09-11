@@ -18,28 +18,23 @@ Ionicon.
 
 _Note: this will download a 45M file_
 ```{r}
-tof_file <- file.path(tempdir(), "PTRTOF_test_spectrum.h5")
-library(curl)
-curl_download("https://dl.dropboxusercontent.com/s/c4miuh22ojswf5r/PTRTOF_test_spectrum.h5?dl=0#",
-			  destfile=tof_file)
+tof_file <- system.file("extdata","PTRTOF_test_spectrum.h5", package="rawTof")
+#if (!file.exists(tof_file)) {
+#  library(curl)
+#  curl_download("https://dl.dropboxusercontent.com/s/c4miuh22ojswf5r/PTRTOF_test_spectrum.h5?dl=0#",
+#				destfile=tof_file)
+#}
 ```
 
 The package requires [rhdf5](https://bioconductor.org/packages/release/bioc/html/rhdf5.html).
 ```{r library}
-library(rhdf5)
 library(rawTof)
-```
-
-## Opening a TOF file
-
-```{r opening a tof file}
-fid <- H5Fopen(tof_file)
 ```
 
 ## Getting the peak data
 
 ```{r}
-peaktable <- get_peak_matrix(fid)
+peaktable <- get_peak_matrix(tof_file)
 plot(peaktable[69, ], type="l", ylab="m/z 69")
 plot(peaktable[45, ], type="l", ylab="m/z 45")
 ```
@@ -52,15 +47,15 @@ plot(peaktable[45, ], type="l", ylab="m/z 45")
 
 ### getting the sum spectrum
 ```{r}
-ss <- get_sum_spec(fid)/180
+ss <- get_sum_spec(tof_file)/180
 ```
 
 ```{r}
-s2 <- get_single_scan(fid, 31)
+s2 <- get_single_scan(tof_file, 31)
 ```
 
 ```{r}
-mh <- masscal_helper(fid)
+mh <- masscal_helper(tof_file)
 mass_scale <- mh$to_mass(seq_along(ss))
 ```
 

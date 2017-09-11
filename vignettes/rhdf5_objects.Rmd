@@ -1,0 +1,80 @@
+---
+title: "Example usage or rawTof objects"
+author: "Clemens Ager"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown:::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Do it with objects}
+  %\VignetteKeyword{example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Example usage
+
+This vignette shows how to load the sample PTR data provided by
+Ionicon using just plain rhdf5 commands.
+
+_Note: this will download a 45M file_
+```{r}
+#tof_file <- file.path("extdata/PTRTOF_test_spectrum.h5")
+tof_file <- system.file("extdata","PTRTOF_test_spectrum.h5", package="rawTof")
+if (!file.exists(tof_file)) {
+  library(curl)
+  curl_download("https://dl.dropboxusercontent.com/s/c4miuh22ojswf5r/PTRTOF_test_spectrum.h5?dl=0#",
+				destfile=tof_file)
+}
+```
+
+```{r library, include = F, eval=F}
+library(rhdf5)
+source('R/TofClass.R')
+```
+
+## create the object
+
+```{r}
+tof_ob <- new("TofClass", filename=tof_file)
+```
+
+## get the sum spectrum
+
+```{r}
+sumspec <- sumspec(tof_ob)
+plot(sumspec, type="l")
+```
+
+
+## get spec at index
+
+```{r}
+aspec <- scan_ind(tof_ob,23)
+plot(aspec, type="l")
+```
+
+### attributes 
+
+```{r}
+gg <- H5Gopen(tof_ob@.datafile, "FullSpectra")
+ao <- H5Aopen(gg, "Single Ion Signal")
+at <- H5Aread(ao)
+```
+
+### get dimension info
+
+```{r}
+h5f <- H5Fopen(tof_file)
+extents <- dim(h5f$`FullSpectra/TofData`)
+aSpec <- h5f$`FullSpectra/TofData`[,1,2,3]
+plot(aSpec,type="l")
+```
+
+### cleaning
+
+It helps to close all open connections.  `rhdf5` seems unable to do it
+by itself.  Might be good to wrap this in `on.exit`.
+
+```{r}
+finalize(tof_ob)
+```

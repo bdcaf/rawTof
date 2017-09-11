@@ -4,12 +4,12 @@
 \alias{get_single_scan}
 \title{extract a single scan from tof spectrum}
 \usage{
-get_single_scan(fid, id)
+get_single_scan(toffile, id)
 }
 \arguments{
-\item{fid}{h5d file handle}
-
 \item{id}{index of scan}
+
+\item{fid}{h5d file handle}
 }
 \value{
 vector of single scan
@@ -31,8 +31,7 @@ is not desirable.
 }
 \examples{
 \dontrun{
-fid <- h5open('toffile.h5')
-get_single_scan(fid,1)
+get_single_scan("toffile.h5",1)
 }
 }
 \seealso{

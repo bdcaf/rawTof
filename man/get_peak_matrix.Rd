@@ -17,7 +17,6 @@ retrieve matrix of precalculated peaks
 }
 \examples{
 \dontrun{
-fid <- h5open('toffile.h5')
-get_peak_matrix(fid)
+get_peak_matrix("tof_file.h5")
 }
 }
