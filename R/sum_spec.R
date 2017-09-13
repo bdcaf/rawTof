@@ -8,4 +8,5 @@
 #' \dontrun{
 #' get_sum_spec("toffile.h5")
 #' }
-get_sum_spec <- function(tof_file) h5read(tof_file, "FullSpectra/SumSpectrum")
+get_sum_spec <- function(tof_file)
+  h5read(tof_file, "FullSpectra/SumSpectrum")

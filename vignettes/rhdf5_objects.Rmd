@@ -1,5 +1,5 @@
 ---
-title: "Example usage or rawTof objects"
+title: "Example usage using an object to cache reused data"
 author: "Clemens Ager"
 date: "`r Sys.Date()`"
 output: 
@@ -11,20 +11,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# Example usage
+# Using objects
 
-This vignette shows how to load the sample PTR data provided by
-Ionicon using just plain rhdf5 commands.
+To speed up reading it makes sense to keep reopening and closing files to
+a minimum.
 
-_Note: this will download a 45M file_
+_Note:_ make sure to cleanup after usage using ```finalize(obj)```.
+
 ```{r}
-#tof_file <- file.path("extdata/PTRTOF_test_spectrum.h5")
-tof_file <- system.file("extdata","PTRTOF_test_spectrum.h5", package="rawTof")
-if (!file.exists(tof_file)) {
-  library(curl)
-  curl_download("https://dl.dropboxusercontent.com/s/c4miuh22ojswf5r/PTRTOF_test_spectrum.h5?dl=0#",
-				destfile=tof_file)
-}
+tof_file <- system.file("extdata","breath.h5", package="tofExampleData")
 ```
 
 ```{r library, include = F, eval=F}

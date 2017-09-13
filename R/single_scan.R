@@ -9,7 +9,7 @@
 #' to get_peak_matrix - but this will take loads of memory and usually
 #' is not desirable.
 #' @export
-#' @param fid h5d file handle
+#' @param toffile file name
 #' @param id index of scan
 #' @import rhdf5
 #' @return vector of single scan
