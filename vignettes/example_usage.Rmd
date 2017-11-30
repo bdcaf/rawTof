@@ -16,16 +16,13 @@ vignette: >
 This vignette works with sample data provided by the
 [tofExampleData](http://github.com/bdecaf/tofExampleData) package.
 
-```{r}
-tof_file <- system.file("extdata","breath.h5", package="tofExampleData")
+```{r, include = F}
+devtools::load_all()
 ```
 
-```{r, include=F, eval=F}
-source("R/dimcalculations.R")
-source("R/peak_matrix.R")
-source("R/sum_spec.R")
-source("R/single_scan.R")
-source("R/mass_calib.R")
+
+```{r}
+tof_file <- system.file("extdata","breath.h5", package="tofExampleData")
 ```
 
 The package requires [rhdf5](https://bioconductor.org/packages/release/bioc/html/rhdf5.html).

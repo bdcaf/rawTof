@@ -1,7 +1,7 @@
 Package: rawTof
 Type: Package
 Title: rawTof
-Version: 0.2.1.000
+Version: 0.2.2.000
 Authors@R: person("Clemens", "Ager", email = "clemens.ager@uibk.ac.at", role = c("aut", "cre"))
 Description: Simple scripts to read out TOF-PTR-MS h5 files such as
   created from ionicon instruments.
@@ -18,3 +18,17 @@ Packaged: 2017-08-05 12:21:26 UTC; cle
 Author: Clemens Ager [aut, cre]
 Maintainer: Clemens Ager <clemens.ager@uibk.ac.at>
 RoxygenNote: 6.0.1
+Collate: 
+    'RawHandle.R'
+    'TofClass.R'
+    'TC-finalize.R'
+    'TC-initialize.R'
+    'TC-scan_block.R'
+    'TC-scan_ind.R'
+    'TC-sumspec.R'
+    'dimcalculations.R'
+    'mass_calib.R'
+    'peak_matrix.R'
+    'rawTof.R'
+    'single_scan.R'
+    'sum_spec.R'

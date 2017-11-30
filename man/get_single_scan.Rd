@@ -7,9 +7,9 @@
 get_single_scan(toffile, id)
 }
 \arguments{
-\item{id}{index of scan}
+\item{toffile}{file name}
 
-\item{fid}{h5d file handle}
+\item{id}{index of scan}
 }
 \value{
 vector of single scan
