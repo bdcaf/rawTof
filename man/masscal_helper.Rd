@@ -4,10 +4,10 @@
 \alias{masscal_helper}
 \title{create functions to work with existing mass calibration}
 \usage{
-masscal_helper(fid)
+masscal_helper(filename)
 }
 \arguments{
-\item{fid}{h5d file handle}
+\item{filename}{tof file name}
 }
 \description{
 create functions to work with existing mass calibration

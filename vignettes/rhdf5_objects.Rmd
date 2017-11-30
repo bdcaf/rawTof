@@ -23,8 +23,7 @@ tof_file <- system.file("extdata","breath.h5", package="tofExampleData")
 ```
 
 ```{r library, include = F, eval=F}
-library(rhdf5)
-source('R/TofClass.R')
+devtools::load_all()
 ```
 
 ## create the object
@@ -47,6 +46,27 @@ plot(sumspec, type="l")
 aspec <- scan_ind(tof_ob,23)
 plot(aspec, type="l")
 ```
+
+## get a block
+
+This is usefull for manual integration.  It uses the notation of
+`rhdf5` of start point and number of elements.
+
+```{r}
+sblock <- scan_block(tof_ob, ind = c(150500,200))
+
+```
+
+```{r, fig.cap = "spectrum of block" }
+plot( apply(sblock, 1, sum), type="l")
+```
+
+```{r, fig.cap = "simple integration of block"}
+plot( apply(sblock, 2, sum), type="l")
+```
+
+
+
 
 ### attributes 
 
