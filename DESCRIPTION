@@ -32,4 +32,5 @@ Collate:
     'rawTof.R'
     'read_stored_masscal.R'
     'single_scan.R'
+    'stored_mass_cal.R'
     'sum_spec.R'
