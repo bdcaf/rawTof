@@ -1,10 +1,12 @@
 #' @include TofClass.R
 NULL
 
+
 #' initializes TofClass based on filename
+#' @name TofClass
+#' @rdname TofClass-class
 #' @export
-setMethod("initialize", "TofClass",
-          function(.Object, filename){
+initialize <- function(.Object, filename){
             .Object@filename <- filename
             .Object@.datafile <- H5Fopen(.Object@filename)
             .Object@.scandata <- H5Dopen(.Object@.datafile,
@@ -19,4 +21,9 @@ setMethod("initialize", "TofClass",
               .read_attrib(.Object@.datafile,
                            "Single Ion Signal")[[1]]
                            .Object
-          })
+          }
+
+#' @export
+#' @name TofClass
+#' @rdname TofClass-class
+setMethod("initialize", "TofClass", initialize)
