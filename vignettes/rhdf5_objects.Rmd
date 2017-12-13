@@ -47,6 +47,13 @@ aspec <- scan_ind(tof_ob,23)
 plot(aspec, type="l")
 ```
 
+## timing information
+
+```{r}
+timing <- get_timing(tof_ob@.datafile)
+```
+
+
 ## get a block
 
 This is usefull for manual integration.  It uses the notation of
@@ -62,7 +69,7 @@ plot( apply(sblock, 1, sum), type="l")
 ```
 
 ```{r, fig.cap = "simple integration of block"}
-plot( apply(sblock, 2, sum), type="l")
+plot(timing, apply(sblock, 2, sum), type="l")
 ```
 
 
