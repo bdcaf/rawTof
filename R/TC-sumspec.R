@@ -4,6 +4,7 @@ NULL
 #' read the sum spectrum
 #' @export
 #' @import rhdf5
+#' @rdname TofClass-class
 setGeneric(name = "sumspec", def = function(.Object) {
              standardGeneric("sumspec")
                      })

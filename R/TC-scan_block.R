@@ -6,6 +6,7 @@ NULL
 #' @import rhdf5
 #' @import magrittr
 #' @export
+#' @rdname TofClass-class
 setGeneric(name = "scan_block", def = function(.Object, indrange) {
              standardGeneric("scan_block")
                      })

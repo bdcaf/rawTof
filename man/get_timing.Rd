@@ -15,6 +15,9 @@ vector of all measurment times
 \description{
 get exact time information of scans
 }
+\note{
+at some point the date format changed. Currently need to try several
+}
 \examples{
 \dontrun{
 get_timing("tof_file.h5")

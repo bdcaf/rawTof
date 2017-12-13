@@ -9,6 +9,7 @@
 #' @name TofClass
 #' @aliases TofClass-class
 #' @import rhdf5
+#' @rdname TofClass-class
 TofClass <- setClass("TofClass",
                      slots = c(
                                filename = "character",
