@@ -7,14 +7,15 @@ NULL
 #' @import magrittr
 #' @export
 #' @rdname TofClass-class
-setGeneric(name = "scan_block", def = function(.Object, indrange) {
+setGeneric(name = "scan_block",
+           def = function(.Object, indrange) {
              standardGeneric("scan_block")
                      })
 
 
 setMethod("scan_block", "TofClass",
           function(.Object, indrange){
-            dd <- tof_ob@.dims
+            dd <- .Object@.dims
             H5Sselect_hyperslab(.Object@.scanspace,
                                 start = c(indrange[[1]], 1, 1, 1),
                                 count = c(indrange[[2]],
