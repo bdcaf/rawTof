@@ -18,7 +18,6 @@ This vignette works with sample data provided by the
 
 ```{r, include = F}
 devtools::load_all()
-library(drake)
 ```
 
 
