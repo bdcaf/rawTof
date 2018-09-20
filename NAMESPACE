@@ -2,6 +2,7 @@
 
 export(directSumSpec)
 export(finalize)
+export(get_creation_time)
 export(get_peak_matrix)
 export(get_single_scan)
 export(get_sum_spec)

@@ -6,9 +6,7 @@
 \alias{TofClass}
 \alias{TofClass-class}
 \alias{finalize}
-\alias{TofClass}
 \alias{initialize}
-\alias{TofClass}
 \alias{scan_block}
 \alias{scan_ind}
 \alias{sumspec}
