@@ -11,14 +11,15 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: rhdf5
-Suggests: knitr, rmarkdown, tofExampleData
+Suggests: knitr, rmarkdown, tofExampleData,
+    testthat
 VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2017-08-05 12:21:26 UTC; cle
 Author: Clemens Ager [aut, cre]
 Maintainer: Clemens Ager <clemens.ager@uibk.ac.at>
 RoxygenNote: 6.1.0
-Collate: 
+Collate:
     'RawHandle.R'
     'TofClass.R'
     'TC-finalize.R'
