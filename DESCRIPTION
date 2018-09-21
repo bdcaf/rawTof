@@ -1,7 +1,7 @@
 Package: rawTof
 Type: Package
 Title: rawTof
-Version: 0.2.4.000
+Version: 0.2.4.001
 Authors@R: person("Clemens", "Ager", email = "clemens.ager@uibk.ac.at", role = c("aut", "cre"))
 Description: Simple scripts to read out TOF-PTR-MS h5 files such as
   created from ionicon instruments.
