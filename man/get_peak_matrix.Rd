@@ -17,6 +17,6 @@ retrieve matrix of precalculated peaks
 }
 \examples{
 \dontrun{
-get_peak_matrix("tof_file.h5")
+get_peak_matrix(fid)
 }
 }

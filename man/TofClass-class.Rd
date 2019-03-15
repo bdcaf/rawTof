@@ -14,7 +14,7 @@
 \usage{
 finalize(.Object)
 
-initialize(.Object, filename)
+initialize(.Object, ...)
 
 \S4method{initialize}{TofClass}(.Object, filename)
 
