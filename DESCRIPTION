@@ -11,6 +11,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Remotes: bioc::rhdf5
+Imports: rhdf5, magittr
 Suggests: knitr, rmarkdown, testthat, MALDIquant
 VignetteBuilder: knitr
 NeedsCompilation: no
