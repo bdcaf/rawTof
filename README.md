@@ -1,3 +1,6 @@
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.org/bdcaf/rawTof.svg?branch=master)](https://travis-ci.org/bdcaf/rawTof)
+<!-- badges: end -->
 # rawTof
 open h5 tof files in R
 
