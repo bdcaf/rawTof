@@ -1,7 +1,7 @@
 #' retrieve sum spectrum
 #'
 #' @export
-#' @param fid h5d file handle
+#' @param tof_file h5d file handle
 #' @seealso \code{get_single_scan} which returns individual scans
 #' @import rhdf5
 #' @examples

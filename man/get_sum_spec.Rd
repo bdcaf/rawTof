@@ -7,7 +7,7 @@
 get_sum_spec(tof_file)
 }
 \arguments{
-\item{fid}{h5d file handle}
+\item{tof_file}{h5d file handle}
 }
 \description{
 retrieve sum spectrum

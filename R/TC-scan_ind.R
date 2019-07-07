@@ -4,6 +4,8 @@ NULL
 
 #' read the spectrum of scan i
 #' @import rhdf5
+#' @param .Object a TofH5 object
+#' @param ind as numeric index of scan
 #' @export
 #' @rdname TofClass-class
 setGeneric(name = "scan_ind", def = function(.Object, ind) {

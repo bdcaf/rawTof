@@ -24,6 +24,11 @@ scan_ind(.Object, ind)
 
 sumspec(.Object)
 }
+\arguments{
+\item{.Object}{a TofH5 object}
+
+\item{ind}{as numeric index of scan}
+}
 \description{
 An S4 class to hold reused values for reading the spectrum
 
