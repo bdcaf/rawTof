@@ -4,6 +4,10 @@
 #' @slot points per scan
 #' @slot nscans number of scans
 #' @slot .dims internal dimensions
+#' @slot .datafile h5 handle of tof data file
+#' @slot .scandata h5 handle of scan data block
+#' @slot .scanspace h5 handle of scan data array
+#' @slot single_ion_signal cps value of single count
 #' @export
 #' @exportClass TofClass
 #' @name TofClass
@@ -24,25 +28,6 @@ TofClass <- setClass("TofClass",
 
 
 
-#' read the spectrum of scan i
-#' @export
-setGeneric(name = "scan_ind", def = function(.Object, ind) {
-             standardGeneric("scan_ind")
-                     })
-
-
-setMethod("scan_ind", "TofClass", function(.Object, ind){
-            pos <- dim_calc(ind, .Object@.dims[-1])
-            H5Sselect_hyperslab(.Object@.scanspace,
-                                start = c(1, pos[[1]], pos[[2]], pos[[3]]),
-                                count = c(.Object@points, 1, 1, 1) )
-            h5spacemem <- H5Screate_simple(.Object@points)
-            out <- H5Dread(h5dataset = .Object@.scandata,
-                           h5spaceFile=.Object@.scanspace,
-                           h5spaceMem=h5spacemem)
-            H5Sclose(h5spacemem)
-            out/.Object@single_ion_signal
-                     })
 
 .read_attrib <- function(df, att){
   gg <- H5Gopen(df, "FullSpectra")
@@ -50,5 +35,23 @@ setMethod("scan_ind", "TofClass", function(.Object, ind){
   out <- H5Aread(ao)
   H5Gclose(gg)
   H5Aclose(ao)
-  out
+  return(out)
 }
+
+setMethod("initialize", "TofClass",
+          function(.Object, filename,...){
+            .Object@filename <- filename
+            .Object@.datafile <- H5Fopen(.Object@filename)
+            .Object@.scandata <- H5Dopen(.Object@.datafile,
+                                         "FullSpectra/TofData")
+            .Object@.scanspace <- H5Dget_space(.Object@.scandata)
+
+            .Object@.dims  <- H5Sget_simple_extent_dims(.Object@.scanspace)$size
+            .Object@points <- .Object@.dims[[1]]
+            .Object@nscans <- prod(.Object@.dims[-1])
+
+            .Object@single_ion_signal <-
+              .read_attrib(.Object@.datafile,
+                           "Single Ion Signal")[[1]]
+            .Object
+          })

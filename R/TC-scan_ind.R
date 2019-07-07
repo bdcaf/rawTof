@@ -1,18 +1,20 @@
 #' @include TofClass.R
 NULL
 
-
 #' read the spectrum of scan i
 #' @import rhdf5
-#' @param .Object a TofH5 object
+#' @param .Object a  object
 #' @param ind as numeric index of scan
+#' @return scan as list of values
 #' @export
-#' @rdname TofClass-class
 setGeneric(name = "scan_ind", def = function(.Object, ind) {
              standardGeneric("scan_ind")
                      })
 
-
+#' read the spectrum of scan i
+#' @param .Object a TofH5 object
+#' @param ind as numeric index of scan
+#' @rdname TofClass-class
 setMethod("scan_ind", "TofClass",
           function(.Object, ind){
             pos <- dim_calc(ind, .Object@.dims[-1])

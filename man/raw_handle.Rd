@@ -15,8 +15,3 @@ S3 object
 \description{
 stores repeatedly used object information
 }
-\examples{
-\dontrun{
-rh <- raw_handle("mytof.h5")
-}
-}

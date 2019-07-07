@@ -5,10 +5,6 @@
 #' @return S3 object
 #' @import rhdf5
 #' @export
-#' @examples
-#' \dontrun{
-#' rh <- raw_handle("mytof.h5")
-#' }
 raw_handle <- function(filename){
   fid <- H5Fopen(filename)
   tofblock <- H5Dopen(H5Gopen(fid, "FullSpectra"), "TofData")
@@ -19,7 +15,7 @@ raw_handle <- function(filename){
               fid = fid,
               full_dims = dims,
               full_space = h5space,
-              pos_calc = function(id) dim_calc(i, dims$size[-1])
+              pos_calc = function(id) dim_calc(id, dims$size[-1])
               )
 
   class(out) <- append(class(out), "raw_handle")

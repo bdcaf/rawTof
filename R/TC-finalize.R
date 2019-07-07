@@ -2,7 +2,6 @@
 NULL
 
 #' do cleanup, call this before leaving
-#' @export
 #' @rdname TofClass-class
 setGeneric(name = "finalize", def = function(.Object) {
              standardGeneric("finalize")

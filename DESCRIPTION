@@ -6,12 +6,15 @@ Authors@R: person("Clemens", "Ager", email = "clemens.ager@uibk.ac.at", role = c
 Description: Simple scripts to read out TOF-PTR-MS h5 files such as
   created from ionicon instruments.
   Note that I am not affiliated with ionicon.
-Depends: R (>= 3.4.1)
+Depends: R (>= 3.4)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Remotes: bioc::rhdf5
-Imports: rhdf5, magrittr
+Imports: 
+    rhdf5,
+    magrittr,
+    methods
 Suggests: knitr, rmarkdown, testthat, MALDIquant
 VignetteBuilder: knitr
 NeedsCompilation: no
@@ -23,7 +26,6 @@ Collate:
     'RawHandle.R'
     'TofClass.R'
     'TC-finalize.R'
-    'TC-initialize.R'
     'TC-scan_block.R'
     'TC-scan_ind.R'
     'TC-sumspec.R'
