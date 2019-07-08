@@ -23,9 +23,7 @@ Author: Clemens Ager [aut, cre]
 Maintainer: Clemens Ager <clemens.ager@uibk.ac.at>
 RoxygenNote: 6.1.1
 Collate:
-    'RawHandle.R'
     'TofClass.R'
-    'TC-finalize.R'
     'TC-scan_block.R'
     'TC-scan_ind.R'
     'TC-sumspec.R'

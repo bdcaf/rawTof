@@ -17,6 +17,7 @@ setGeneric(name = "scan_ind", def = function(.Object, ind) {
 #' @rdname TofClass-class
 setMethod("scan_ind", "TofClass",
           function(.Object, ind){
+            if (ind > .Object@nscans) stop("File does not contain this spectrum.")
             pos <- dim_calc(ind, .Object@.dims[-1])
             H5Sselect_hyperslab(.Object@.scanspace,
                                 start = c(1, pos[[1]], pos[[2]], pos[[3]]),

@@ -41,7 +41,13 @@ TofClass <- setClass("TofClass",
 setMethod("initialize", "TofClass",
           function(.Object, filename,...){
             .Object@filename <- filename
-            .Object@.datafile <- H5Fopen(.Object@filename)
+
+            tmpOpen <- H5Fopen(.Object@filename)
+            if (is.logical(tmpOpen) && !tmpOpen){
+              stop("H5 file is not present or invalid!")
+            }
+
+            .Object@.datafile <- tmpOpen
             .Object@.scandata <- H5Dopen(.Object@.datafile,
                                          "FullSpectra/TofData")
             .Object@.scanspace <- H5Dget_space(.Object@.scandata)
@@ -55,3 +61,15 @@ setMethod("initialize", "TofClass",
                            "Single Ion Signal")[[1]]
             .Object
           })
+
+# use finalizer
+setGeneric(name = "finalize", def = function(.Object) {
+             standardGeneric("finalize")
+                     })
+
+
+setMethod("finalize", "TofClass", function(.Object){
+            H5Sclose(.Object@.scanspace)
+            H5Dclose(.Object@.scandata)
+            H5Fclose(.Object@.datafile)
+                     })

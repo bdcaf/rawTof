@@ -16,13 +16,19 @@
 #' dim_calc(13, c(4, 3))
 #' }
 dim_calc <- function(wanted, diml){
-  dimhelper <- function(i, wid) c(i %% wid, i %/% wid)
-  # zero indexed calculation
-  res <- rep(NA, length(diml))
-  cu <- c(0, wanted-1)
-  for (i in seq_along(diml)){
-    cu <- dimhelper(cu[[2]], diml[[i]])
-    res[i] <- cu[[1]]
-  }
-  res + 1
+  w1 <- wanted - 1
+  res <- dim_private(w1, diml)
+  return(res + 1)
 }
+
+dim_private <- function(wanted, diml){
+  if (length(diml) == 0) stop("Too small data block.")
+  size_here <- diml[[1]]
+  size_next <- diml[-1]
+  here <- divmod(wanted, size_here)
+  if (here[["div"]]==0) return(c(here[["mod"]], rep(0, length(size_next))))
+  return( c(here[["mod"]], dim_private(here[["div"]], size_next)) )
+}
+
+divmod <- function(i, wid) c(mod = i %% wid,
+                             div = i %/% wid)
