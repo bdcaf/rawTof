@@ -1,4 +1,5 @@
 <!-- badges: start -->
+[![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)](https://github.com/joethorley/stability-badges#experimental)
 [![Travis build status](https://travis-ci.org/bdcaf/rawTof.svg?branch=master)](https://travis-ci.org/bdcaf/rawTof)
 <!-- badges: end -->
 # rawTof
