@@ -14,62 +14,50 @@
 #' @aliases TofClass-class
 #' @import rhdf5
 #' @rdname TofClass-class
-TofClass <- setClass("TofClass",
-                     slots = c(
-                               filename = "character",
-                               points = "numeric",
-                               nscans = "numeric",
-                               single_ion_signal = "numeric",
-                               .dims = "numeric",
-                               .datafile = "H5IdComponent",
-                               .scandata = "H5IdComponent",
-                               .scanspace = "H5IdComponent"
-                               ) )
+TofClass <- setClass("TofClass", slots = c(filename = "character", points = "numeric", 
+    nscans = "numeric", single_ion_signal = "numeric", .dims = "numeric", .datafile = "H5IdComponent", 
+    .scandata = "H5IdComponent", .scanspace = "H5IdComponent"))
 
 
 
 
-.read_attrib <- function(df, att){
-  gg <- H5Gopen(df, "FullSpectra")
-  ao <- H5Aopen(gg, att)
-  out <- H5Aread(ao)
-  H5Gclose(gg)
-  H5Aclose(ao)
-  return(out)
+.read_attrib <- function(df, att) {
+    gg <- H5Gopen(df, "FullSpectra")
+    ao <- H5Aopen(gg, att)
+    out <- H5Aread(ao)
+    H5Gclose(gg)
+    H5Aclose(ao)
+    return(out)
 }
 
-setMethod("initialize", "TofClass",
-          function(.Object, filename,...){
-            .Object@filename <- filename
-
-            tmpOpen <- H5Fopen(.Object@filename)
-            if (is.logical(tmpOpen) && !tmpOpen){
-              stop("H5 file is not present or invalid!")
-            }
-
-            .Object@.datafile <- tmpOpen
-            .Object@.scandata <- H5Dopen(.Object@.datafile,
-                                         "FullSpectra/TofData")
-            .Object@.scanspace <- H5Dget_space(.Object@.scandata)
-
-            .Object@.dims  <- H5Sget_simple_extent_dims(.Object@.scanspace)$size
-            .Object@points <- .Object@.dims[[1]]
-            .Object@nscans <- prod(.Object@.dims[-1])
-
-            .Object@single_ion_signal <-
-              .read_attrib(.Object@.datafile,
-                           "Single Ion Signal")[[1]]
-            .Object
-          })
+setMethod("initialize", "TofClass", function(.Object, filename, ...) {
+    .Object@filename <- filename
+    
+    tmpOpen <- H5Fopen(.Object@filename)
+    if (is.logical(tmpOpen) && !tmpOpen) {
+        stop("H5 file is not present or invalid!")
+    }
+    
+    .Object@.datafile <- tmpOpen
+    .Object@.scandata <- H5Dopen(.Object@.datafile, "FullSpectra/TofData")
+    .Object@.scanspace <- H5Dget_space(.Object@.scandata)
+    
+    .Object@.dims <- H5Sget_simple_extent_dims(.Object@.scanspace)$size
+    .Object@points <- .Object@.dims[[1]]
+    .Object@nscans <- prod(.Object@.dims[-1])
+    
+    .Object@single_ion_signal <- .read_attrib(.Object@.datafile, "Single Ion Signal")[[1]]
+    .Object
+})
 
 # use finalizer
 setGeneric(name = "finalize", def = function(.Object) {
-             standardGeneric("finalize")
-                     })
+    standardGeneric("finalize")
+})
 
 
-setMethod("finalize", "TofClass", function(.Object){
-            H5Sclose(.Object@.scanspace)
-            H5Dclose(.Object@.scandata)
-            H5Fclose(.Object@.datafile)
-                     })
+setMethod("finalize", "TofClass", function(.Object) {
+    H5Sclose(.Object@.scanspace)
+    H5Dclose(.Object@.scandata)
+    H5Fclose(.Object@.datafile)
+})

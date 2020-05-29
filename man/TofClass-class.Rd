@@ -8,7 +8,7 @@
 \alias{scan_block}
 \alias{scan_block,TofClass-method}
 \alias{scan_ind,TofClass-method}
-\alias{sumspec,TofClass-method}
+\alias{storedMassCal,TofClass-method}
 \title{An S4 class to hold reused values for reading the spectrum}
 \usage{
 scan_block(.Object, indrange)
@@ -17,7 +17,7 @@ scan_block(.Object, indrange)
 
 \S4method{scan_ind}{TofClass}(.Object, ind)
 
-\S4method{sumspec}{TofClass}(.Object)
+\S4method{storedMassCal}{TofClass}(.Object)
 }
 \arguments{
 \item{.Object}{a TofH5 object}

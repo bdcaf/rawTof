@@ -3,9 +3,9 @@
 #' @param file location of h5 file
 #' @return list of conversion functions and parameters
 #' @export
-read_stored_masscal <- function(file){
-  fid1 <- H5Fopen(file)
-  mcfun <- stored_mass_cal.tof_h5(fid1)
-  H5Fclose(fid1)
-  return(mcfun)
+read_stored_masscal <- function(file) {
+    fid1 <- H5Fopen(file)
+    mcfun <- stored_mass_cal.tof_h5(fid1)
+    H5Fclose(fid1)
+    return(mcfun)
 }

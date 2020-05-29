@@ -10,10 +10,9 @@
 #' with(mc, to_index(c(45,47)))
 #' with(mc, to_mass(c(2000:3000)))
 #' }
-masscal_helper <- function(filename){
-  gr <- h5readAttributes(filename, "FullSpectra")
-  with(gr,
-       list( to_mass = Vectorize(function(i) ( (i-`MassCalibration p2`)/`MassCalibration p1`)^2),
-             to_index = Vectorize(function(m) `MassCalibration p2` + `MassCalibration p1`*sqrt(m))
-             ))
+masscal_helper <- function(filename) {
+    gr <- h5readAttributes(filename, "FullSpectra")
+    with(gr, list(to_mass = Vectorize(function(i) ((i - `MassCalibration p2`)/`MassCalibration p1`)^2), 
+        to_index = Vectorize(function(m) `MassCalibration p2` + `MassCalibration p1` * 
+            sqrt(m))))
 }

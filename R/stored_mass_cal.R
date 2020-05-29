@@ -7,15 +7,9 @@
 #' bother to adjust for all the available formulas.
 #' @param fid a h5f file handle
 #' @return list of functions to convert between mass and index
-stored_mass_cal.tof_h5 <- function(fid){
-  gr <- h5readAttributes(fid, "FullSpectra")
-  with(gr,
-       list(
-  to_mass = Vectorize(function(i) (
-   (i - `MassCalibration p2`) / `MassCalibration p1`) ^ 2),
-  to_index = Vectorize(function(m)
-   `MassCalibration p2` + `MassCalibration p1` * sqrt(m)),
-            coefs = c(p1 = `MassCalibration p1`,
-                      p2 = `MassCalibration p2`)
-             ))
+stored_mass_cal.tof_h5 <- function(fid) {
+    gr <- h5readAttributes(fid, "FullSpectra")
+    with(gr, list(to_mass = Vectorize(function(i) ((i - `MassCalibration p2`)/`MassCalibration p1`)^2), 
+        to_index = Vectorize(function(m) `MassCalibration p2` + `MassCalibration p1` * 
+            sqrt(m)), coefs = c(p1 = `MassCalibration p1`, p2 = `MassCalibration p2`)))
 }

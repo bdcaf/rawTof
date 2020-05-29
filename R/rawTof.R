@@ -6,7 +6,7 @@
 #' \url{http://www.ionicon.com}
 #' \url{https://sites.google.com/site/ptrtof/home}
 #'
-#' A package to interact directly with the h5 files produced by Ionicon
-#' data acquisition. 
+#' A package to interact directly with the h5 files
+#' produced by Ionicons TofDaq software.
 #'
 NULL
